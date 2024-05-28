@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/u1sccl/lab/issues"
   },
-  "homepage": "https://github.com/u1sccl/lab#readme"
+  "homepage": "https://github.com/u1sccl/lab#readme",
+  "publishConfig": {
+  "u1sccl:registry": "https://npm.pkg.github.com"
+}
 }
