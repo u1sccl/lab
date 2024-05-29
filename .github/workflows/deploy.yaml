@@ -31,3 +31,32 @@ jobs:
         run: |
           docker run -d -p 8080:80 ghcr.io/${{ github.repository }}:latest
           docker ps -a
+  build:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code 
+        uses: actions/checkout@v3
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: 'sccl' 
+          cluster-name: 'scclk8s'
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'default'
+          manifests: |
+             deployment.yaml
+          images: ghcr.io/${{ github.repository }}:latest
+          pull-images: false 

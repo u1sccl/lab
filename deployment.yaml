@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: lab
-        image: u1sccl/lab
+        image: ghcr.io/u1sccl/lab:latest
         ports:
         - containerPort: 8080
 ---
