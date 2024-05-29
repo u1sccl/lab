@@ -27,8 +27,6 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
 
-      - name: Run the build process with Docker
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ghcr.io/${{ github.repository }}:latest
-          run: docker ps -a
+      - name: Test
+        run: |
+          docker run -p ghcr.io/${{ github.repository }}:latest
