@@ -25,6 +25,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+          logout: false
           tags: |
             ghcr.io/u1sccl/lab:latest
             ghcr.io/u1sccl/lab:${{ github.sha }}
