@@ -31,8 +31,4 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/${{ github.repository }}:latest
-          run: echo "hello world"
-
-      - name: Test
-        run: |
-          docker ps -a
+          run: docker ps -a
