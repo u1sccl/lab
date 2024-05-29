@@ -23,7 +23,7 @@ kind: Service
 metadata:
   name: lab-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: lab
   ports:
