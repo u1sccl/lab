@@ -26,3 +26,17 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+      - name: Create KIND Cluster
+        uses: helm/kind-action@v1
+
+      - name: Deploy to KIND
+        run: |
+          kubectl apply -f deployment.yaml
+
+      - name: Test
+        run: |
+          kubectl wait --for=condition=Ready pod -l app=lab --timeout=300s
+          NODE_PORT=$(kubectl get svc lab-service -o=jsonpath='{.spec.ports[0].nodePort}')
+          NODE_IP=$(kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+          curl -s $NODE_IP:$NODE_PORT
