@@ -16,7 +16,7 @@ spec:
       - name: lab
         image: ghcr.io/u1sccl/lab:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -28,5 +28,5 @@ spec:
     app: lab
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 8080
+      targetPort: 80
