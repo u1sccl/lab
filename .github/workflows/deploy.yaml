@@ -30,3 +30,4 @@ jobs:
       - name: Test
         run: |
           docker run -d -p 8080:80 ghcr.io/${{ github.repository }}:latest
+          docker ps -a
