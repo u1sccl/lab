@@ -31,8 +31,8 @@ jobs:
         run: |
           docker run -d -p 8080:80 ghcr.io/${{ github.repository }}:latest
           docker ps -a
-  build:
-    needs: Build
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code 
